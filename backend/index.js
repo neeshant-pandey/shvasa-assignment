@@ -22,7 +22,9 @@ async function distributeTicketsInRoundRobin() {
     assignedTo: null,
     status: "New",
   });
-  const alreadyAssignedAgent = await SupportTicket.find();
+  const alreadyAssignedAgent = await SupportTicket.find({
+    assignedTo: { $ne: null },
+  });
   const assignedAgentlist = alreadyAssignedAgent.map((current) => {
     if (current.assignedTo !== null) {
       return current.assignedTo;
