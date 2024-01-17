@@ -1,0 +1,58 @@
+.content-box h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.content-box form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: #2c2c2c; /* Dark background for input and textarea */
+  border: none;
+  color: white;
+}
+
+textarea {
+  resize: none;
+  background-color: #2c2c2c;
+  border: none;
+  outline: none;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 16px;
+  color: white;
+  min-height: 100px;
+  box-shadow: none;
+}
+
+.submit-agent {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #2383e2;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 14px;
+}
+
+.submit-agent:hover {
+  background-color: #1c6cb1;
+}
+
+/* Error message styling */
+p {
+  color: red;
+  font-size: 14px;
+  margin-top: -5px;
+  margin-bottom: 5px;
+}

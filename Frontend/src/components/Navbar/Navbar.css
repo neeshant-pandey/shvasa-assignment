@@ -1,0 +1,44 @@
+.navbar {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  height: 100%;
+  padding: 1rem;
+  background-color: var(--sidebar-color);
+}
+
+.navbar-nav {
+  list-style: none;
+  width: 100%;
+  padding: 0;
+}
+
+.nav-item {
+  width: 100%;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  transition: background-color 0.2s;
+  padding: 0 25px 0 0;
+  background: none;
+}
+.sidebarListItemText {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-left: 12px;
+}
+
+.nav-link:hover {
+  background-color: var(--sidebar-hover-color);
+}
+.nav-item.active {
+  color: #ffffff;
+  background-color: #343a40;
+  font-weight: bold;
+  margin-left: -10px;
+  padding: 0 10px;
+}
