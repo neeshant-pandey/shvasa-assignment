@@ -32,8 +32,9 @@ async function distributeTicketsInRoundRobin() {
   });
   const nonDuplicateAgentlist = [...new Set(assignedAgentlist)];
   const requiredAvailableAgents = availableAgents.filter(
-    (item) => !nonDuplicateAgentlist.includes(item)
+    (agent) => !nonDuplicateAgentlist.includes(agent._id.toString())
   );
+
   if (
     requiredAvailableAgents.length === 0 ||
     ticketsPendingAssignment.length === 0
@@ -42,14 +43,6 @@ async function distributeTicketsInRoundRobin() {
       "Either no active agents available or no tickets awaiting assignment."
     );
     return;
-  }
-  let indexForCurrentAgent = 0;
-  for (const ticket of ticketsPendingAssignment) {
-    ticket.assignedTo = requiredAvailableAgents[indexForCurrentAgent]._id;
-    ticket.status = "Assigned";
-    await ticket.save();
-    indexForCurrentAgent =
-      (indexForCurrentAgent + 1) % requiredAvailableAgents.length;
   }
 }
 
@@ -70,7 +63,7 @@ app.post("/api/support-tickets", async (req, res) => {
     const ticket = new SupportTicket({ ...req.body });
     const ticketData = await ticket.save();
     await distributeTicketsInRoundRobin();
-    res.status(201).json(ticketData);
+    res.status(201).json(someresult);
   } catch (err) {
     res
       .status(400)
