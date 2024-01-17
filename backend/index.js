@@ -22,7 +22,20 @@ async function distributeTicketsInRoundRobin() {
     assignedTo: null,
     status: "New",
   });
-  if (availableAgents.length === 0 || ticketsPendingAssignment.length === 0) {
+  const alreadyAssignedAgent = await SupportTicket.find();
+  const assignedAgentlist = alreadyAssignedAgent.map((current) => {
+    if (current.assignedTo !== null) {
+      return current.assignedTo;
+    }
+  });
+  const nonDuplicateAgentlist = [...new Set(assignedAgentlist)];
+  const requiredAvailableAgents = availableAgents.filter(
+    (item) => !nonDuplicateAgentlist.includes(item)
+  );
+  if (
+    requiredAvailableAgents.length === 0 ||
+    ticketsPendingAssignment.length === 0
+  ) {
     console.log(
       "Either no active agents available or no tickets awaiting assignment."
     );
@@ -30,10 +43,11 @@ async function distributeTicketsInRoundRobin() {
   }
   let indexForCurrentAgent = 0;
   for (const ticket of ticketsPendingAssignment) {
-    ticket.assignedTo = availableAgents[indexForCurrentAgent]._id;
+    ticket.assignedTo = requiredAvailableAgents[indexForCurrentAgent]._id;
     ticket.status = "Assigned";
     await ticket.save();
-    indexForCurrentAgent = (indexForCurrentAgent + 1) % availableAgents.length;
+    indexForCurrentAgent =
+      (indexForCurrentAgent + 1) % requiredAvailableAgents.length;
   }
 }
 
