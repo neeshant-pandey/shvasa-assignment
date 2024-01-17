@@ -63,7 +63,7 @@ app.post("/api/support-tickets", async (req, res) => {
     const ticket = new SupportTicket({ ...req.body });
     const ticketData = await ticket.save();
     await distributeTicketsInRoundRobin();
-    res.status(201).json(someresult);
+    res.status(201).json(ticketData);
   } catch (err) {
     res
       .status(400)
