@@ -5,7 +5,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --experimental-json-modules --exec babel-node index.js"
+    "start": "node --experimental-json-modules --exec babel-node index.js"
   },
   "author": "Neeshant",
   "license": "ISC",
