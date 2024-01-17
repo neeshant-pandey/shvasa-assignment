@@ -44,6 +44,14 @@ async function distributeTicketsInRoundRobin() {
     );
     return;
   }
+  let indexForCurrentAgent = 0;
+  for (const ticket of ticketsPendingAssignment) {
+    ticket.assignedTo = requiredAvailableAgents[indexForCurrentAgent]._id;
+    ticket.status = "Assigned";
+    await ticket.save();
+    indexForCurrentAgent =
+      (indexForCurrentAgent + 1) % requiredAvailableAgents.length;
+  }
 }
 
 app.post("/api/support-agents", async (req, res) => {
