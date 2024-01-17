@@ -19,7 +19,7 @@ const HomePage = () => {
         };
 
         const response = await axios.get(
-          "http://localhost:3000/api/support-tickets",
+          "https://shvasa-assignment.vercel.app/api/support-tickets",
           { params }
         );
         setTickets(response.data);

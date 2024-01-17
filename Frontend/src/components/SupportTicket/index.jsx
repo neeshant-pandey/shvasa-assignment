@@ -72,7 +72,7 @@ const SupportTicketEntryScreen = () => {
     if (validateForm()) {
       try {
         const response = await axios.post(
-          "http://localhost:3000/api/support-tickets",
+          "https://shvasa-assignment.vercel.app/api/support-tickets",
           ticketData
         );
         console.log("Ticket created successfully:", response.data);
